@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Busca de Usuários GitHub</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 30px;
+      background: #f5f5f5;
+    }
+    h1 {
+      color: #333;
+    }
+    input {
+      padding: 8px;
+      width: 250px;
+      margin-right: 10px;
+    }
+    button {
+      padding: 8px 15px;
+      cursor: pointer;
+      background: #24292f;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+    ul {
+      margin-top: 20px;
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      background: white;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 6px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    img {
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+    }
+    a {
+      color: #0366d6;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Buscar Usuários no GitHub</h1>
+  <input type="text" id="campoBusca" placeholder="Digite o nome do usuário">
+  <button id="btnBuscar">Buscar</button>
+
+  <ul id="resultado"></ul>
+
+  <script>
+    const campoBusca = document.getElementById('campoBusca');
+    const btnBuscar = document.getElementById('btnBuscar');
+    const resultado = document.getElementById('resultado');
+
+    btnBuscar.addEventListener('click', async () => {
+      const termo = campoBusca.value.trim();
+      resultado.innerHTML = ""; 
+
+      if (!termo) {
+        resultado.innerHTML = "<li>Digite algo para pesquisar.</li>";
+        return;
+      }
+
+      try {
+        const resposta = await fetch(`https://api.github.com/search/users?q=${termo}`);
+        const dados = await resposta.json();
+
+        if (dados.items && dados.items.length > 0) {
+          dados.items.forEach(usuario => {
+            const li = document.createElement('li');
+            li.innerHTML = `
+              <img src="${usuario.avatar_url}" alt="${usuario.login}">
+              <a href="${usuario.html_url}" target="_blank">${usuario.login}</a>
+            `;
+            resultado.appendChild(li);
+          });
+        } else {
+          resultado.innerHTML = "<li>Não foram encontrados usuários para esta pesquisa.</li>";
+        }
+      } catch (erro) {
+        resultado.innerHTML = "<li>Erro ao buscar usuários.</li>";
+      }
+    });
+  </script>
+</body>
+</html>
