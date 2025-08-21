@@ -1,0 +1,90 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f8fa;
+    margin: 0;
+    padding: 0;
+  }
+  
+  header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: white;
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+    z-index: 1000;
+  }
+  
+  #formPost {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  #postText {
+    resize: none;
+    padding: 10px;
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+  
+  #formPost button {
+    background: #1da1f2;
+    border: none;
+    color: white;
+    padding: 8px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  #formPost button:hover {
+    background: #0d8ddb;
+  }
+  
+  #feed {
+    margin-top: 120px;
+    padding: 15px;
+  }
+  
+  .post {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+  }
+  
+  .post-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .post-header img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .post img.cat {
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-top: 10px;
+  }
+  
+  .like-btn {
+    margin-top: 10px;
+    background: #e0245e;
+    border: none;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+  
+  .like-btn:hover {
+    background: #c81e51;
+  }
+  
